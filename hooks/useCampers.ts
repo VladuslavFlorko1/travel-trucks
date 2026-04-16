@@ -2,11 +2,13 @@
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getCampers } from "@/lib/api/campers";
+import { Filters } from "@/types/filters";
 
-export function useCampers() {
+export function useCampers(filters: Filters) {
   return useInfiniteQuery({
-    queryKey: ["campers"],
-    queryFn: ({ pageParam }) => getCampers({ pageParam, limit: 4 }),
+    queryKey: ["campers", filters],
+    queryFn: ({ pageParam }) =>
+      getCampers({ pageParam, limit: 4, filters }),
     initialPageParam: 1,
     getNextPageParam: lastPage => {
       if (lastPage.page >= lastPage.totalPages) {

@@ -1,14 +1,30 @@
 "use client";
 
 import { useCampers } from "@/hooks/useCampers";
-
-type Camper = {
-  id: string;
-  name: string;
-};
+import { Camper } from "@/types/camper";
+import { useSearchParams } from "next/navigation";
+import Filters from "@/components/Catalog/Filters";
+import CamperCard from "@/components/Catalog/CamperCard";
 
 export default function Catalog() {
-  const { data, isLoading, isError, error } = useCampers();
+  const searchParams = useSearchParams();
+
+  const filters = {
+    location: searchParams.get("location") || "",
+    form: searchParams.get("form") || "",
+    engine: searchParams.get("engine") || "",
+    transmission: searchParams.get("transmission") || "",
+  };
+
+  const {
+    data,
+    isLoading,
+    isError,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useCampers(filters);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -20,13 +36,21 @@ export default function Catalog() {
 
   return (
     <div>
+      <Filters />
+
       {data?.pages.map((page, pageIndex) => (
         <div key={pageIndex}>
           {page.campers.map((camper: Camper) => (
-            <div key={camper.id}>{camper.name}</div>
+            <CamperCard key={camper.id} camper={camper} />
           ))}
         </div>
       ))}
+
+      {hasNextPage && (
+        <button onClick={() => fetchNextPage()}>
+          {isFetchingNextPage ? "Loading..." : "Load More"}
+        </button>
+      )}
     </div>
   );
 }
