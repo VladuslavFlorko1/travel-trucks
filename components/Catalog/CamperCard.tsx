@@ -14,9 +14,11 @@ export default function CamperCard({ camper }: CamperCardProps) {
         alt={camper.name}
         width={300}
         height={200}
-        priority
       />
-      <p>{camper.description}</p>
+
+      <h2>{camper.name}</h2>
+
+      <p>{camper.description}...</p>
       <p>{camper.location}</p>
       <p>€{camper.price}</p>
       <p>{camper.transmission}</p>
@@ -28,7 +30,7 @@ export default function CamperCard({ camper }: CamperCardProps) {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Show more
+        <button type="button">Show more</button>
       </Link>
     </div>
   );

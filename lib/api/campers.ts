@@ -1,6 +1,8 @@
 import { api } from "./axios";
-import { CampersResponse } from "@/types/camper";
+import { CampersResponse, CamperDetails } from "@/types/camper";
 import { Filters } from "@/types/filters";
+import { BookingRequestData, BookingResponse } from "@/types/booking";
+import { Review } from "@/types/review";
 
 type GetCampersParams = {
   pageParam?: number;
@@ -23,6 +25,28 @@ export async function getCampers({
       ...(filters?.transmission && { transmission: filters.transmission }),
     },
   });
+
+  return response.data;
+}
+
+export async function getCamperById(id: string): Promise<CamperDetails> {
+  const response = await api.get<CamperDetails>(`/campers/${id}`);
+  return response.data;
+}
+
+export async function getCamperReviews(camperId: string): Promise<Review[]> {
+  const response = await api.get<Review[]>(`/campers/${camperId}/reviews`);
+  return response.data;
+}
+
+export async function createBookingRequest(
+  camperId: string,
+  bookingData: BookingRequestData
+): Promise<BookingResponse> {
+  const response = await api.post<BookingResponse>(
+    `/campers/${camperId}/booking-requests`,
+    bookingData
+  );
 
   return response.data;
 }

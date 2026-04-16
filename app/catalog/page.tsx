@@ -33,6 +33,9 @@ export default function Catalog() {
   if (isError) {
     return <div>{(error as Error).message}</div>;
   }
+  if (!data) {
+  return null;
+  }
 
   return (
     <div>
@@ -47,7 +50,7 @@ export default function Catalog() {
       ))}
 
       {hasNextPage && (
-        <button onClick={() => fetchNextPage()}>
+        <button type="button" onClick={() => fetchNextPage()}>
           {isFetchingNextPage ? "Loading..." : "Load More"}
         </button>
       )}

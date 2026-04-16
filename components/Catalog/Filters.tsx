@@ -26,6 +26,7 @@ export default function Filters() {
   const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
     updateFilter(event.target.name, event.target.value);
   };
+
   const resetFilters = () => {
     router.push("/catalog");
   };
@@ -36,12 +37,13 @@ export default function Filters() {
         type="text"
         name="location"
         placeholder="Location"
-        defaultValue={searchParams.get("location") || ""}
+        value={searchParams.get("location") || ""}
         onChange={handleLocationChange}
       />
 
       <div>
         <p>Form</p>
+
         <label>
           <input
             type="radio"
@@ -78,6 +80,7 @@ export default function Filters() {
 
       <div>
         <p>Engine</p>
+
         <label>
           <input
             type="radio"
@@ -114,6 +117,7 @@ export default function Filters() {
 
       <div>
         <p>Transmission</p>
+
         <label>
           <input
             type="radio"
@@ -135,10 +139,11 @@ export default function Filters() {
           />
           Manual
         </label>
-        </div>
-        <button type="button" onClick={resetFilters}>
-            Reset filters
-        </button>      
+      </div>
+
+      <button type="button" onClick={resetFilters}>
+        Reset filters
+      </button>
     </div>
   );
 }
