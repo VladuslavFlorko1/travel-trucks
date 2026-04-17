@@ -1,14 +1,19 @@
 import Link from "next/link";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <div>
-      <h1>TravelTrucks</h1>
-      <p>Find your perfect camper for your next trip</p>
+    <section className={styles.hero}>
+      <div className={styles.overlay}>
+        <div className={styles.content}>
+          <h1>Campers of your dreams</h1>
+          <p>You can find everything you want in our catalog</p>
 
-      <Link href="/catalog">
-        <button type="button">View Now</button>
-      </Link>
-    </div>
+          <Link href="/catalog">
+            <button className={styles.button}>View Now</button>
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }

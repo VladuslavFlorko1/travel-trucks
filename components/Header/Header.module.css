@@ -1,0 +1,48 @@
+.header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 0 64px;
+    height: 72px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f2f4f7;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+}
+
+
+.nav a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: #101828;
+    transition: color 0.2s ease;
+}
+
+
+.nav a:hover {
+    color: #82b99b;
+    /* зелений з макету */
+}
+
+
+.active {
+    color: #82b99b;
+}
+
+
+.right {
+    width: 136px;
+}

@@ -3,12 +3,17 @@ import { CampersResponse, CamperDetails } from "@/types/camper";
 import { Filters } from "@/types/filters";
 import { BookingRequestData, BookingResponse } from "@/types/booking";
 import { Review } from "@/types/review";
+import { CamperFiltersResponse } from "@/types/camperFilters";
 
 type GetCampersParams = {
   pageParam?: number;
   limit?: number;
   filters?: Filters;
 };
+export async function getCampersFilters(): Promise<CamperFiltersResponse> {
+  const response = await api.get<CamperFiltersResponse>("/campers/filters");
+  return response.data;
+}
 
 export async function getCampers({
   pageParam = 1,

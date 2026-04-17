@@ -1,148 +1,134 @@
 "use client";
 
+import { ChangeEvent, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ChangeEvent } from "react";
+import { useCampersFilters } from "@/hooks/useCampersFilters";
 
 export default function Filters() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const updateFilter = (key: string, value: string) => {
-    const params = new URLSearchParams(searchParams.toString());
+  const { data, isLoading, isError } = useCampersFilters();
 
-    if (value) {
-      params.set(key, value);
-    } else {
-      params.delete(key);
+  const [location, setLocation] = useState(searchParams.get("location") || "");
+  const [form, setForm] = useState(searchParams.get("form") || "");
+  const [engine, setEngine] = useState(searchParams.get("engine") || "");
+  const [transmission, setTransmission] = useState(
+    searchParams.get("transmission") || ""
+  );
+
+
+  const handleApplyFilters = () => {
+    const params = new URLSearchParams();
+
+    if (location.trim()) {
+      params.set("location", location.trim());
+    }
+
+    if (form) {
+      params.set("form", form);
+    }
+
+    if (engine) {
+      params.set("engine", engine);
+    }
+
+    if (transmission) {
+      params.set("transmission", transmission);
     }
 
     router.push(`/catalog?${params.toString()}`);
   };
 
-  const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
-    updateFilter("location", event.target.value);
-  };
-
-  const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-    updateFilter(event.target.name, event.target.value);
-  };
-
-  const resetFilters = () => {
+  const handleClearFilters = () => {
+    setLocation("");
+    setForm("");
+    setEngine("");
+    setTransmission("");
     router.push("/catalog");
   };
 
+  const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setLocation(event.target.value);
+  };
+
+  if (isLoading) {
+    return <div>Loading filters...</div>;
+  }
+
+  if (isError || !data) {
+    return <div>Failed to load filters</div>;
+  }
+
   return (
     <div>
+      <p>Location</p>
       <input
         type="text"
         name="location"
-        placeholder="Location"
-        value={searchParams.get("location") || ""}
+        placeholder="Kyiv, Ukraine"
+        value={location}
         onChange={handleLocationChange}
       />
 
       <div>
-        <p>Form</p>
+        <h2>Filters</h2>
 
-        <label>
-          <input
-            type="radio"
-            name="form"
-            value="alcove"
-            checked={searchParams.get("form") === "alcove"}
-            onChange={handleRadioChange}
-          />
-          Alcove
-        </label>
+        <div>
+          <p>Camper form</p>
+          {data.forms.map(item => (
+            <label key={item}>
+              <input
+                type="radio"
+                name="form"
+                value={item}
+                checked={form === item}
+                onChange={event => setForm(event.target.value)}
+              />
+              {item}
+            </label>
+          ))}
+        </div>
 
-        <label>
-          <input
-            type="radio"
-            name="form"
-            value="panel_van"
-            checked={searchParams.get("form") === "panel_van"}
-            onChange={handleRadioChange}
-          />
-          Panel van
-        </label>
+        <div>
+          <p>Engine</p>
+          {data.engines.map(item => (
+            <label key={item}>
+              <input
+                type="radio"
+                name="engine"
+                value={item}
+                checked={engine === item}
+                onChange={event => setEngine(event.target.value)}
+              />
+              {item}
+            </label>
+          ))}
+        </div>
 
-        <label>
-          <input
-            type="radio"
-            name="form"
-            value="integrated"
-            checked={searchParams.get("form") === "integrated"}
-            onChange={handleRadioChange}
-          />
-          Integrated
-        </label>
+        <div>
+          <p>Transmission</p>
+          {data.transmissions.map(item => (
+            <label key={item}>
+              <input
+                type="radio"
+                name="transmission"
+                value={item}
+                checked={transmission === item}
+                onChange={event => setTransmission(event.target.value)}
+              />
+              {item}
+            </label>
+          ))}
+        </div>
       </div>
 
-      <div>
-        <p>Engine</p>
+      <button type="button" onClick={handleApplyFilters}>
+        Search
+      </button>
 
-        <label>
-          <input
-            type="radio"
-            name="engine"
-            value="petrol"
-            checked={searchParams.get("engine") === "petrol"}
-            onChange={handleRadioChange}
-          />
-          Petrol
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            name="engine"
-            value="diesel"
-            checked={searchParams.get("engine") === "diesel"}
-            onChange={handleRadioChange}
-          />
-          Diesel
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            name="engine"
-            value="hybrid"
-            checked={searchParams.get("engine") === "hybrid"}
-            onChange={handleRadioChange}
-          />
-          Hybrid
-        </label>
-      </div>
-
-      <div>
-        <p>Transmission</p>
-
-        <label>
-          <input
-            type="radio"
-            name="transmission"
-            value="automatic"
-            checked={searchParams.get("transmission") === "automatic"}
-            onChange={handleRadioChange}
-          />
-          Automatic
-        </label>
-
-        <label>
-          <input
-            type="radio"
-            name="transmission"
-            value="manual"
-            checked={searchParams.get("transmission") === "manual"}
-            onChange={handleRadioChange}
-          />
-          Manual
-        </label>
-      </div>
-
-      <button type="button" onClick={resetFilters}>
-        Reset filters
+      <button type="button" onClick={handleClearFilters}>
+        Clear filters
       </button>
     </div>
   );
