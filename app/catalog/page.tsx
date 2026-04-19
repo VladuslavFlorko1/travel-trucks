@@ -5,6 +5,7 @@ import { Camper } from "@/types/camper";
 import { useSearchParams } from "next/navigation";
 import Filters from "@/components/Catalog/Filters";
 import CamperCard from "@/components/Catalog/CamperCard";
+import styles from "./Catalog.module.css";
 
 export default function Catalog() {
   const searchParams = useSearchParams();
@@ -27,33 +28,48 @@ export default function Catalog() {
   } = useCampers(filters);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className={styles.state}>Loading...</div>;
   }
 
   if (isError) {
-    return <div>{(error as Error).message}</div>;
+    return <div className={styles.state}>{(error as Error).message}</div>;
   }
+
   if (!data) {
-  return null;
+    return null;
   }
 
   return (
-    <div>
-      <Filters />
+    <section className={styles.page}>
+      <div className={styles.container}>
+        <aside className={styles.sidebar}>
+          <Filters />
+        </aside>
 
-      {data?.pages.map((page, pageIndex) => (
-        <div key={pageIndex}>
-          {page.campers.map((camper: Camper) => (
-            <CamperCard key={camper.id} camper={camper} />
-          ))}
+        <div className={styles.content}>
+          <div className={styles.cardsList}>
+            {data.pages.map((page, pageIndex) => (
+              <div key={pageIndex} className={styles.pageGroup}>
+                {page.campers.map((camper: Camper) => (
+                  <CamperCard key={camper.id} camper={camper} />
+                ))}
+              </div>
+            ))}
+          </div>
+
+          {hasNextPage && (
+            <div className={styles.loadMoreWrap}>
+              <button
+                type="button"
+                className={styles.loadMoreBtn}
+                onClick={() => fetchNextPage()}
+              >
+                {isFetchingNextPage ? "Loading..." : "Load more"}
+              </button>
+            </div>
+          )}
         </div>
-      ))}
-
-      {hasNextPage && (
-        <button type="button" onClick={() => fetchNextPage()}>
-          {isFetchingNextPage ? "Loading..." : "Load More"}
-        </button>
-      )}
-    </div>
+      </div>
+    </section>
   );
 }

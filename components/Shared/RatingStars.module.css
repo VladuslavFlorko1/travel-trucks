@@ -1,0 +1,9 @@
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+.infoCard {
+    margin-bottom: 32px;
+    /* відстань між двома картками */
+}

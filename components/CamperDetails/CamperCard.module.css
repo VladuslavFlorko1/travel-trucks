@@ -1,0 +1,367 @@
+.page {
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px 80px;
+    background: #fff;
+    font-family: "Inter", sans-serif;
+    color: #101828;
+}
+
+.container {
+    max-width: 1220px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+
+/* ===== Верхній блок ===== */
+.top {
+    display: flex;
+    align-items: stretch;
+    gap: 24px;
+}
+
+.galleryColumn {
+    flex: 1 1 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainImageWrap {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.mainImage {
+    object-fit: cover;
+}
+
+.thumbs {
+    margin-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+}
+
+.thumbButton {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    background: transparent;
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+    width: 100%;
+}
+
+.thumbWrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.thumbButton:hover,
+.thumbButtonActive {
+    opacity: 1;
+}
+
+.thumbImage {
+    object-fit: cover;
+}
+
+/* ===== Інформаційний блок ===== */
+.infoCard {
+    flex: 1 1 40%;
+    background: #f9fafb;
+    border-radius: 16px;
+    border: 1px solid #eaecf0;
+    padding: 32px 36px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 16px;
+    overflow-y: auto;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #101828;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 14px;
+    color: #475467;
+    margin-top: 4px;
+}
+
+.metaItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.price {
+    font-size: 22px;
+    font-weight: 700;
+    color: #101828;
+    margin-top: 4px;
+}
+
+.description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #475467;
+    margin-top: 8px;
+}
+
+/* ===== Vehicle details (всередині infoCard) ===== */
+.detailsCard {
+    margin-top: 8px;
+    padding-top: 20px;
+    border-top: 1px solid #eaecf0;
+}
+
+.detailsTitle {
+    font-size: 18px;
+    font-weight: 700;
+    color: #101828;
+    margin-bottom: 16px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tag {
+    background: #f2f4f7;
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: #344054;
+    line-height: 1;
+    font-weight: 500;
+}
+
+.specs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid #eaecf0;
+    padding-top: 16px;
+}
+
+.specRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #101828;
+}
+
+.specRow span:first-child {
+    color: #475467;
+}
+
+/* ===== Нижній блок ===== */
+.bottom {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+/* ===== Reviews ===== */
+.reviewsBlock {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sectionTitle {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #101828;
+}
+
+.reviewsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.reviewCard {
+    background: #f9fafb;
+    border-radius: 16px;
+    padding: 24px 28px;
+    border: 1px solid #eaecf0;
+}
+
+.reviewHeader {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.avatar {
+    width: 56px;
+    height: 56px;
+    background-color: #e4e7ec;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 18px;
+    color: #475467;
+    flex-shrink: 0;
+}
+
+.reviewInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+.reviewerName {
+    font-weight: 600;
+    font-size: 16px;
+    color: #101828;
+}
+
+.reviewText {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #475467;
+}
+
+/* ===== Booking form ===== */
+.formCard {
+    flex: 1 1 50%;
+    background: #ffffff;
+    border: 1px solid #eaecf0;
+    border-radius: 16px;
+    padding: 48px 40px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: stretch;
+}
+
+.formTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: #101828;
+    margin-bottom: 8px;
+}
+
+.formSubtitle {
+    font-size: 16px;
+    color: #475467;
+    margin-bottom: 32px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input {
+    background: #f9fafb;
+    border: none;
+    border-radius: 12px;
+    padding: 18px 20px;
+    font-size: 16px;
+    color: #101828;
+    box-shadow: inset 0 0 0 1px #eaecf0;
+    transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input::placeholder {
+    color: #98a2b3;
+}
+
+.input:focus {
+    outline: none;
+    background: #fff;
+    box-shadow: inset 0 0 0 1.5px #475467;
+}
+
+.submitBtn {
+    margin-top: 10px;
+    background: #7d9c92;
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    padding: 18px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.submitBtn:hover {
+    background: #6b8c83;
+    transform: translateY(-1px);
+}
+
+.submitBtn:disabled {
+    background: #d0d5dd;
+    cursor: not-allowed;
+}
+.title {
+    margin-bottom: 8px;
+}
+
+.meta {
+    margin-bottom: 4px;
+}
+
+.price {
+    margin-bottom: 4px;
+}
+
+.description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #475467;
+    margin-bottom: 32px;
+    /* <-- ось відступ перед Vehicle details */
+}
+
+.detailsCard {
+    padding-top: 24px;
+    border-top: 1px solid #eaecf0;
+}
+.infoCard {
+    flex: 1 1 40%;
+    background: #f9fafb;
+    border-radius: 16px;
+    border: 1px solid #eaecf0;
+    padding: 32px 36px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    /* прибираємо gap */
+    overflow-y: auto;
+}

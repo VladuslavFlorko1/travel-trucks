@@ -4,7 +4,7 @@
     align-items: center;
     padding: 0 64px;
     height: 72px;
-    background-color: #ffffff;
+    background-color: #F7F7F7;
     border-bottom: 1px solid #f2f4f7;
 }
 
@@ -34,15 +34,13 @@
 
 .nav a:hover {
     color: #82b99b;
-    /* зелений з макету */
-}
-
-
-.active {
-    color: #82b99b;
 }
 
 
 .right {
     width: 136px;
+}
+.nav a:hover,
+.nav a.active {
+    color: #82b99b;
 }

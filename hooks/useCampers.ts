@@ -8,7 +8,7 @@ export function useCampers(filters: Filters) {
   return useInfiniteQuery({
     queryKey: ["campers", filters],
     queryFn: ({ pageParam }) =>
-      getCampers({ pageParam, limit: 4, filters }),
+      getCampers({ pageParam, perPage: 4, filters }),
     initialPageParam: 1,
     getNextPageParam: lastPage => {
       if (lastPage.page >= lastPage.totalPages) {
