@@ -3,8 +3,8 @@
 import { useCampers } from "@/hooks/useCampers";
 import { Camper } from "@/types/camper";
 import { useSearchParams } from "next/navigation";
-import Filters from "@/components/Catalog/Filters";
-import CamperCard from "@/components/Catalog/CamperCard";
+import Filters from "@/components/Catalog/Filters/Filters";
+import CamperCard from "@/components/Catalog/CamperCard/CamperCard";
 import styles from "./Catalog.module.css";
 
 export default function Catalog() {

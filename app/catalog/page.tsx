@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Catalog from "./Catalog"; 
+import Catalog from "@/components/Catalog/Catalog";
 export default function CatalogPage() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
